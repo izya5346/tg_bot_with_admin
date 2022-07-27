@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="nav">
+		
+		<ul><li><div class="nav__title">AdminPanel</div></li>
+			<li><a href="{{ url_for('messages') }}">Сообщения</a></li>
+			<li><a href="{{ url_for('coupons') }}">Купоны</a></li>
+			<li><a href="{{ url_for('users') }}">Пользователи</a></li>
+            <li><a href="{{ url_for('settings') }}">Настройки</a></li>
+            <li><a href="{{ url_for('history') }}">История</a></li>
+            <li><a href="{{ url_for('write_to_person') }}">Написать человеку</a></li>
+            <li><a href="{{ url_for('do_mailing') }}">Сделать рассылку</a></li>
+		</ul>
+	</nav>
+    <main>
+        {%if request.method == "POST"%}
+        <div class = "green">
+            <span>Успешно!</span>
+        </div>
+        {%endif%}
+        <table>
+        <tr>
+            <th>id</th>
+            <th>Название</th>
+            <th>RU</th>
+            <th>EN</th>
+        </tr>
+        
+        {%for msg in msgs%}
+        <tr>
+            <td>{{msg.id}}</td>
+            {%if msg.image%}
+            <td><a href="#"class = 'tooltips'><span><img src="{{ url_for('static', path='images/1.png') }}" width="250" height="125"></span>{{msg.label}}</a></td>
+            {%else%}
+            <td>{{msg.label}}</td>
+            {%endif%}
+            <td>{{msg.value.message.ru}}</td>
+            <td>{{msg.value.message.en}}</td>
+            <td class="button"><a href="settings.msgs/edit/{{msg.id}}">Изменить</a></td>
+        </tr>
+        {%endfor%}
+        </table>
+        <table>
+            <tr>
+                <th>id</th>
+                <th>Название</th>
+                <th>Конфиг</th>
+            </tr>
+            
+            {%for oth in other%}
+            <tr>
+                <td>{{oth.id}}</td>
+                <td>{{oth.label}}</td>
+                <td>{{oth.value}}</td>
+                <td class="button"><a href="settings/edit/{{oth.id}}">Изменить</a></td>
+            </tr>
+            {%endfor%}
+            </table>
+    </main>
+</body>
+</html>

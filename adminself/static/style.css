@@ -1,0 +1,198 @@
+*
+{
+ padding: 0;
+ margin: 0;
+ list-style-type: none;
+ text-decoration: none;
+ color: black;
+}
+.nav
+{
+    position: fixed;
+    top: 0;
+    background-color: lightcyan;
+    width: 100%;
+    border-bottom: 1px solid grey;
+
+}
+.nav__title
+{
+    margin: 0 50px;
+    justify-content: flex-start;
+    text-align: center;
+}
+.nav ul
+{
+    display: flex;
+    flex: 3;
+}
+.nav li
+{
+    justify-content: flex-end;
+    padding: 20px 10px;
+    border-left: 1px solid grey;
+}
+main table
+{
+    text-align: center;
+    max-width: 75%;
+    min-width: 50%;
+    align-self: center;
+}
+main
+{
+    flex-direction: column;
+    min-width: 50%;
+    align-items: flex-end;
+    max-width: 75%;
+    margin-top: 4%;
+    display: flex;
+    
+}
+table th, table td
+{
+    border: 1px solid grey;
+    padding: 0.5em;
+}
+table tr
+{
+    border-bottom: 1px solid grey;
+}
+.text
+{
+    text-align: left;
+}
+.button
+{
+    border-radius: 0.4em;
+    background-color: aqua;
+}
+table select
+{
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+table option
+{
+    padding: 5px 10px;
+}
+.load
+{
+    margin: 0 10px;
+    padding: 5px 15px;
+    border-radius: 0.4em;
+    background-color: aqua;
+}
+.forbtn
+{
+    margin: 10px;
+    flex-direction: row;
+    display: flex;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+form
+{
+    align-self: center;
+    flex-direction: column;
+    display: flex;
+    min-width: 65%;
+}
+form .intext
+{
+    margin: 10px 0;
+    padding: 5px;
+    width: 85%;
+}
+form span
+{
+    text-align: center;
+    align-self: center;
+    margin: 10px;
+    width: 15%;
+}
+form div
+{
+    min-width: 50%;
+    display: flex;
+    justify-content: center;
+}
+.submit
+{
+    margin-top: 2em;
+    justify-content: flex-end;
+}
+.green
+{
+    margin: 10px;
+    border: 1px solid;
+    min-width: 75%;
+    align-self: center;
+    padding: 10px 5px;
+    border-radius: 5px;
+    color: green;
+    background-color: lightgreen;
+}
+.del
+{
+    border: none;
+    margin: 0 10px;
+    padding: 5px 15px;
+    border-radius: 0.4em;
+    background-color: red;
+    cursor: pointer;
+}
+.delform
+
+{
+    align-self: auto;
+    flex-direction: row;
+    display: flex;
+}
+.send
+{
+    cursor: pointer;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 0.4em;
+    background-color: aqua;
+}
+.files
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.rowfiles
+{
+    display: flex;
+
+}
+.image
+{
+    margin:5px;
+    
+}
+.tooltips
+{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.tooltips span
+{
+    position: absolute;
+    visibility: hidden;
+    
+}
+.tooltips:hover span
+{
+    visibility: visible;
+    margin-bottom: 30px;
+    
+}

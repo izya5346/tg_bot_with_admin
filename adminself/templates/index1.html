@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="nav">
+		
+		<ul><li><div class="nav__title">AdminPanel</div></li>
+			<li><a href="{{ url_for('messages') }}">Сообщения</a></li>
+			<li><a href="{{ url_for('coupons') }}">Купоны</a></li>
+			<li><a href="{{ url_for('users') }}">Пользователи</a></li>
+            <li><a href="{{ url_for('settings') }}">Настройки</a></li>
+            <li><a href="{{ url_for('history') }}">История</a></li>
+            <li><a href="{{ url_for('write_to_person') }}">Написать человеку</a></li>
+            <li><a href="{{ url_for('do_mailing') }}">Сделать рассылку</a></li>
+		</ul>
+	</nav>
+    <main>
+        {%if request.method == "POST"%}
+        <div class = "green">
+            <span>Успешно!</span>
+        </div>
+        {%endif%}
+        {%if action == "coupons"%}
+        <div class="forbtn">
+        <a href="{{ url_for('load') }}" class = "load">Выгрузить</a>
+        <form action="/delcoups" class="delform" method="POST">
+            <input type ="date" name ="dat" value="{{now}}">
+            <input type="submit" class="del" value="Удалить">
+        </form>
+        </div>
+        {%elif action == "messages"%}
+        <div class="forbtn">
+            <a href="{{ url_for('loadmsg') }}" class = "load">Выгрузить</a>
+            </div>
+        {%elif action == "history"%}
+            <div class="forbtn">
+                <a href="{{ url_for('loadhist') }}" class = "load">Выгрузить</a>
+                </div>
+        {%endif%}
+        <table>
+            {%if action == "messages"%}
+            <tr>
+                <th>id</th>
+                <th>Дата и время</th>
+                <th>Пользователь</th>
+                <th>Текст</th>
+            </tr>
+            
+            {%for message in messages%}
+            <tr>
+                <td>{{message.id}}</td>
+                <td>{{message.date}}</td>
+                <td>{{message.username}}</td>
+                <td class="text">{{message.text}}</td>
+            </tr>
+            {%endfor%}
+            {%elif action == "users"%}
+            <tr>
+                <th>id</th>
+                <th>Ник</th>
+                <th>Баланс</th>
+                <th>Кошелёк</th>
+                <th>Рефералы</th>
+
+            </tr>
+            
+            {%for user in users%}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.balance}}</td>
+                <td>{{user.wallet}}</td>
+                <td>
+                    <select>
+                        <option selected>1-го: {{user.count_refs}} 2-го: {{user.count_refs_2nd}}</option>
+                    {%if user.refs1%}
+                    <optgroup label="1-го уровня">
+                    {%for ref1 in user.refs1%}
+                    <option>{{ref1}}</option>
+                    {%endfor%}
+                    </optgroup>
+                    {%endif%}
+                    {%if user.refs2%}
+                    <optgroup label="2-го уровня">
+                        {%for ref2 in user.refs2%}
+                        <option>{{ref2}}</option>
+                        {%endfor%}
+                    </optgroup>
+                    {%endif%}
+                </select></td>
+                <td class="button"><a href="{{action}}/edit/{{user.id}}">Изменить</a></td>
+            </tr>
+            {%endfor%}
+            {%elif action == "coupons"%}
+            <tr>
+                <th>id</th>
+                <th>Купон</th>
+                <th>Пользователь</th>
+                <th>Дата и время</th>
+                <th>Выгружен</th>
+            </tr>
+            
+            {%for coupon in coupons%}
+            <tr>
+                <td>{{coupon.id}}</td>
+                <td>{{coupon.coupon}}</td>
+                <td>{{coupon.username}}</td>
+                <td>{{coupon.date}}</td>
+                {%if coupon.is_loaded %}
+                <td>&check;</td>
+                {%else%}
+                <td>&#65794;</td>
+                {%endif%}
+            </tr>
+            {%endfor%}
+            {%elif action == "history"%}
+            <tr>
+                <th>id</th>
+                <th>Дата и время</th>
+                <th>Тип</th>
+                <th>Сумма</th>
+                <th>Пользователь</th>
+            </tr>
+            
+            {%for hist in history%}
+            <tr>
+                <td>{{hist.id}}</td>
+                <td>{{hist.date}}</td>
+                <td>{{hist.type}}</td>
+                <td>{{hist.amount}}</td>
+                <td>{{hist.username}}</td>
+            </tr>
+            {%endfor%}
+            {%endif%}
+        </table>
+    </main>
+</body>
+</html>
